@@ -24,6 +24,12 @@ SELECT * FROM EMPLOYEE WHERE FNAME LIKE 'J___%';                 -- gets the det
 SELECT * FROM EMPLOYEE WHERE SALARY>60000;                       -- gets the deatils of the employee whose salary is more than 60000
 SELECT * FROM EMPLOYEE WHERE SALARY<80000;                       -- gets the deatils of the employee whose salary is less than 80000
 SELECT * FROM EMPLOYEE WHERE SALARY BETWEEN 50000 AND 80000;     -- gets the deatils of the employee whose salary is BETWEEN 50K AND 80K
+SELECT INSTR(FNAME, 'J')"POSITION" FROM EMPLOYEE WHERE FNAME='JOHN';        -- returns the position of 'J'
+SELECT * FROM EMPLOYEE WHERE SALARY = (SELECT MIN(SALARY) FROM EMPLOYEE);   -- returns the details of employee with least salary
+SELECT * FROM EMPLOYEE WHERE SALARY = (SELECT MAX(SALARY) FROM EMPLOYEE);   -- returns the details of employee with maximum salary
+SELECT COUNT(DISTINCT(DEPARTMENT)) "NO. OF DEPT" FROM EMPLOYEE;             -- returns the count of distinct dept
+SELECT AVG(SALARY) "AVERAGE SALARY" FROM EMPLOYEE;    
+SELECT SUBSTR(FNAME, 1, 3) FROM EMPLOYEE;                
 
 CREATE TABLE INCENTIVES(EMP_REF_ID NUMBER(3), INC_DATE DATE, AMT NUMBER(5), FOREIGN KEY (EMP_REF_ID) REFERENCES EMPLOYEE);
 
