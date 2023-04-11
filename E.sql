@@ -9,6 +9,8 @@ INSERT INTO EMPLOYEE(EMPLOYEE_NO, fNAME, lNAME, SALARY, JOINING_DATE, DEPARTMENT
 INSERT INTO EMPLOYEE(EMPLOYEE_NO, fNAME, lNAME, SALARY, JOINING_DATE, DEPARTMENT)VALUES(5, 'PRANAV', 'SINHA', 40000, TO_DATE('08-DEC-2013', 'DD-MON-YYYY'), 'BANKING');
 INSERT INTO EMPLOYEE(EMPLOYEE_NO, fNAME, lNAME, SALARY, JOINING_DATE, DEPARTMENT)VALUES(6, 'THOMAS', 'SHELBY', 60000, TO_DATE('08-DEC-2013', 'DD-MON-YYYY'), 'BANKING');
 INSERT INTO EMPLOYEE(EMPLOYEE_NO, fNAME, lNAME, SALARY, JOINING_DATE, DEPARTMENT)VALUES(7, 'MONICA', 'PANCHAL', 40000, TO_DATE('08-FEB-2013', 'DD-MON-YYYY'), 'MARKETING');
+INSERT INTO EMPLOYEE(EMPLOYEE_NO, fNAME, lNAME, SALARY, JOINING_DATE, DEPARTMENT)VALUES(8, 'TANISHA', 'SHAH', 60000, TO_DATE('08-JAN-2013', 'DD-MON-YYYY'), 'SECURITY');
+
 
 SELECT * FROM EMPLOYEE; 
 
@@ -33,6 +35,15 @@ SELECT SUBSTR(FNAME, 1, 3) FROM EMPLOYEE;                                   -- r
 SELECT LTRIM(FNAME, ' ') FROM EMPLOYEE;                                     -- returns the first name while trimming out the white spaces from left
 SELECT RTRIM(FNAME, ' ') FROM EMPLOYEE;                                     -- returns the first name while trimming out the white spaces from right
 SELECT LENGTH(FNAME)"LENGTH", FNAME FROM EMPLOYEE;                          -- returns the length of different first names from employee
+SELECT FNAME, REPLACE(FNAME, 'O', '$') FROM EMPLOYEE;                       -- replaces 'o' with '$'
+SELECT FNAME || '_' || LNAME FROM EMPLOYEE;                                 -- concatenates fname and lname using '_' (Any Symbol can be used)
+SELECT FNAME, TO_CHAR(JOINING_DATE, 'YYYY')"JOINING YEAR", TO_CHAR(JOINING_DATE, 'MON')"JOINING MONTH", TO_CHAR(JOINING_DATE, 'DD')"JOINING DAY" FROM EMPLOYEE;                                                            
+                                                                            -- returns fname, joining date in diff cols
+SELECT * FROM EMPLOYEE WHERE TO_CHAR(JOINING_DATE, 'YYYY')='2013';          -- returns employee whose joining year = 2013
+SELECT * FROM EMPLOYEE WHERE TO_CHAR(JOINING_DATE, 'MON')='JAN';            -- returns employee whose joining month = january
+SELECT * FROM EMPLOYEE WHERE JOINING_DATE < TO_DATE('01-JAN-2015', 'DD-MON-YYYY');    -- returns employee who joined before 1 jan 2015
+SELECT * FROM EMPLOYEE WHERE JOINING_DATE > TO_DATE('01-JAN-2012', 'DD-MON-YYYY');    -- returns employee who joined after 1 jan 2012
+SELECT FNAME, TO_CHAR(JOINING_DATE, 'DD/MM/YYYY HH:MI:SS') "JOINING DATE WITH TIME" FROM EMPLOYEE;   -- returns joining date and time of all employees
 
 CREATE TABLE INCENTIVES(EMP_REF_ID NUMBER(3), INC_DATE DATE, AMT NUMBER(5), FOREIGN KEY (EMP_REF_ID) REFERENCES EMPLOYEE);
 
@@ -54,3 +65,5 @@ SELECT LOWER(fNAME) FROM EMPLOYEE;
 SELECT UPPER(fNAME) FROM EMPLOYEE;
 
 SELECT DISTINCT DEPARTMENT FROM EMPLOYEE;
+
+SELECT FNAME, INC_DATE-JOINING_DATE FROM EMPLOYEE E INNER JOIN INCENTIVES I ON E.EMPLOYEE_NO = I.EMP_REF_ID;  -- RETURNS THE DIFF OF INC_DATE AND JOINING_DATE
