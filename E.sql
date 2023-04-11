@@ -28,8 +28,11 @@ SELECT INSTR(FNAME, 'J')"POSITION" FROM EMPLOYEE WHERE FNAME='JOHN';        -- r
 SELECT * FROM EMPLOYEE WHERE SALARY = (SELECT MIN(SALARY) FROM EMPLOYEE);   -- returns the details of employee with least salary
 SELECT * FROM EMPLOYEE WHERE SALARY = (SELECT MAX(SALARY) FROM EMPLOYEE);   -- returns the details of employee with maximum salary
 SELECT COUNT(DISTINCT(DEPARTMENT)) "NO. OF DEPT" FROM EMPLOYEE;             -- returns the count of distinct dept
-SELECT AVG(SALARY) "AVERAGE SALARY" FROM EMPLOYEE;    
-SELECT SUBSTR(FNAME, 1, 3) FROM EMPLOYEE;                
+SELECT AVG(SALARY) "AVERAGE SALARY" FROM EMPLOYEE;                          -- returns the average salary
+SELECT SUBSTR(FNAME, 1, 3) FROM EMPLOYEE;                                   -- returns the first three letters of every name from FNAME 
+SELECT LTRIM(FNAME, ' ') FROM EMPLOYEE;                                     -- returns the first name while trimming out the white spaces from left
+SELECT RTRIM(FNAME, ' ') FROM EMPLOYEE;                                     -- returns the first name while trimming out the white spaces from right
+SELECT LENGTH(FNAME)"LENGTH", FNAME FROM EMPLOYEE;                          -- returns the length of different first names from employee
 
 CREATE TABLE INCENTIVES(EMP_REF_ID NUMBER(3), INC_DATE DATE, AMT NUMBER(5), FOREIGN KEY (EMP_REF_ID) REFERENCES EMPLOYEE);
 
